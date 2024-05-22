@@ -23,7 +23,8 @@ const HistoryContext = React.createContext<{
   setHistory: (history: HistoryType) => void;
 }>({
   history: [],
-  setHistory: (history: HistoryType) => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setHistory: () => {},
 });
 
 export const useHistory = () => {

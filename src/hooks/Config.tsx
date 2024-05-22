@@ -31,7 +31,8 @@ const ConfigContext = React.createContext<{
   setConfig: (config: ConfigType) => void;
 }>({
   config: getFromStorage(),
-  setConfig: (config: ConfigType) => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setConfig: () => {},
 });
 
 export const useConfig = () => {

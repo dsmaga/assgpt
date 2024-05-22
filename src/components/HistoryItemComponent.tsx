@@ -33,7 +33,7 @@ export default function HistoryItemComponent(props: HistoryItemProps) {
         <Markdown
           components={{
             code(props) {
-              const { children, className, node, ...rest } = props;
+              const { children, className, ...rest } = props;
               const match = /language-(\w+)/.exec(className || '');
               return match ? (
                 <SyntaxHighlighter

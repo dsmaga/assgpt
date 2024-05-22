@@ -34,7 +34,7 @@ const callCompletions = async (request: OpenAiRequestType, apiKey: string) => {
 const OpenAiContext = React.createContext<{
   completions: (messages: OpenAiMessageType[]) => Promise<OpenAiResponseType>;
 }>({
-  completions: async (messages: OpenAiMessageType[]) => {
+  completions: async () => {
     throw new Error('No OpenAiProvider');
   },
 });
