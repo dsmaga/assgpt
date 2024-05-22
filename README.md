@@ -13,3 +13,5 @@ An API key is required [https://platform.openai.com/api-keys].
 
 
 Use at your own risk.
+
+Homepage: [https://dsmaga.github.io/assgpt/]
