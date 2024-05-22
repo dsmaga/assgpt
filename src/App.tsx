@@ -1,25 +1,58 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import InputComponent from './components/InputComponent';
+import HistoryComponent from './components/HistoryComponent';
+import { ConfigProvider } from './hooks/Config';
+import { HistoryProvider } from './hooks/History';
+import ConfigComponent from './components/ConfigComponent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import { OpenAiProvider } from './hooks/OpenAi';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 function App() {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <ConfigProvider>
+        <HistoryProvider>
+          <OpenAiProvider>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100vh',
+              }}
+            >
+              <div
+                style={{
+                  flex: 1,
+                  overflowY: 'auto',
+                }}
+              >
+                <HistoryComponent />
+              </div>
+              <InputComponent openConfig={() => setOpen(true)} />
+            </div>
+            <Dialog onClose={handleClose} open={open}>
+              <DialogTitle>Configuration</DialogTitle>
+              <ConfigComponent closeConfig={handleClose} />
+            </Dialog>
+          </OpenAiProvider>
+        </HistoryProvider>
+      </ConfigProvider>
+    </ThemeProvider>
   );
 }
 
