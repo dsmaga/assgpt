@@ -9,6 +9,7 @@ import ConfigComponent from './components/ConfigComponent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { OpenAiProvider } from './hooks/OpenAi';
+import { CircularProgress } from '@mui/material';
 
 const darkTheme = createTheme({
   palette: {
@@ -18,6 +19,7 @@ const darkTheme = createTheme({
 
 function App() {
   const [open, setOpen] = React.useState(false);
+  const [preloader, setPreloader] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
   };
@@ -42,8 +44,22 @@ function App() {
                 }}
               >
                 <HistoryComponent />
+                {preloader && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      padding: 10,
+                    }}
+                  >
+                    <CircularProgress />
+                  </div>
+                )}
               </div>
-              <InputComponent openConfig={() => setOpen(true)} />
+              <InputComponent
+                openConfig={() => setOpen(true)}
+                setPreloader={setPreloader}
+              />
             </div>
             <Dialog onClose={handleClose} open={open}>
               <DialogTitle>Configuration</DialogTitle>

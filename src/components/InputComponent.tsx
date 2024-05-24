@@ -13,8 +13,10 @@ import { OpenAiResponseType, useOpenAi } from '../hooks/OpenAi';
 
 export default function InputComponent({
   openConfig,
+  setPreloader,
 }: {
   openConfig: () => void;
+  setPreloader: (value: boolean) => void;
 }) {
   const [input, setInput] = React.useState('');
   const history = useHistory();
@@ -32,6 +34,7 @@ export default function InputComponent({
     event.preventDefault();
     history.setHistory(_history);
     setInput('');
+    setPreloader(true);
     openai
       .completions(
         _history.map((item) => ({
@@ -49,6 +52,9 @@ export default function InputComponent({
           },
         ];
         history.setHistory(_history);
+      })
+      .finally(() => {
+        setPreloader(false);
       });
   };
 

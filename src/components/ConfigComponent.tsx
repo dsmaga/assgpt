@@ -55,10 +55,10 @@ export default function ConfigComponent({
         onChange={(event) => setApiKey(event.target.value)}
       />
       <FormControl fullWidth style={{ marginBottom: 20 }}>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <InputLabel id="chat-label">Chat</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="chat-label"
+          id="chat"
           value={model}
           label="Model"
           onChange={handleModelChange}
